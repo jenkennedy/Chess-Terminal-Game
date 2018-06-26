@@ -12,29 +12,34 @@ class Display
 
   def render
     system('clear')
-    33.times { print "-" }
     board.grid.each_with_index do |row, idx1|
       print "\n"
       row.each_with_index do |el, idx2|
-        piece = el.nil? ? "X" : "O"
+        piece = el.symbol
+        color = el.color
+        bg_color = (idx1 + idx2).odd? ? :white : :black
         if @cursor.cursor_pos == [idx1, idx2]
-          color = @selected ? :green : :red
-          print "|" + " #{piece} ".colorize(:color => color, :background => :black).bold
+          bg_color = @selected ? :red : :gray
+          print " #{piece} ".colorize(:color => color, :background => bg_color).bold
         else
-          print "| #{piece} "
+          print " #{piece} ".colorize(:color => color, :background => bg_color)
         end
       end
-      print "|\n"
-      33.times {print "-"}
     end
     print "\n"
   end
 
   def run
+    start_pos = nil
     while true
       render
       input = @cursor.get_input
       unless input.nil?
+        start_pos = input if @selected
+        unless @selected || start_pos.nil?
+          make_move(start_pos, input)
+          start_pos = nil
+        end
         @selected = !@selected
       end
     end

@@ -4,9 +4,21 @@ class Queen < Piece
   include SlidingPiece
 
   def initialize(pos, board, color)
-    super
+    super(pos, board)
     @color = color
-    @symbol = :q if color == :white
-    @symbol = :Q if color == :black
+    @symbol = :"♛"
+  end
+
+  def move_dirs
+    [[0, 1], [0, -1],
+    [1, 0], [-1, 0],
+    [1, 1], [-1, -1],
+    [1, -1], [-1, 1]]
   end
 end
+
+# ♔♚
+# ♜♖
+# ♝♗
+# ♞♘
+# ♟♙

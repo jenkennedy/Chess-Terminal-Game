@@ -10,7 +10,8 @@ class Piece
   end
 
   def valid_move?(pos)
-    return false unless pos[0].between?(0,7) && pos[1].between?(0,7)
+    return false if @board[pos[0]][pos[1]].color == color
+    true
   end
 
   private
@@ -30,6 +31,8 @@ module SlidingPiece
       while valid_move?([row, col])
         possible_moves << [row, col]
 
+        current_spot = @board[row][col]
+        break if !current_spot.is_a?(NullPiece) && current_spot.color != @color
         row,col = row + dir[0], col + dir[1]
       end
     end
