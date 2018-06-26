@@ -12,14 +12,14 @@ class Display
 
   def render
     system('clear')
-    33.times { print "-"}
+    33.times { print "-" }
     board.grid.each_with_index do |row, idx1|
       print "\n"
       row.each_with_index do |el, idx2|
         piece = el.nil? ? "X" : "O"
         if @cursor.cursor_pos == [idx1, idx2]
           color = @selected ? :green : :red
-          print "|" + " #{piece} ".colorize(color).bold
+          print "|" + " #{piece} ".colorize(:color => color, :background => :black).bold
         else
           print "| #{piece} "
         end
