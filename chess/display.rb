@@ -7,7 +7,6 @@ class Display
   def initialize(board)
     @cursor = Cursor.new([0, 0], board)
     @board = board
-    @selected = false
   end
 
   def render
@@ -19,7 +18,7 @@ class Display
         color = el.color
         bg_color = (idx1 + idx2).odd? ? :white : :black
         if @cursor.cursor_pos == [idx1, idx2]
-          bg_color = @selected ? :red : :yellow
+          bg_color = @cursor.selected ? :red : :yellow
           print " #{piece} ".colorize(:color => color, :background => bg_color).bold
         else
           print " #{piece} ".colorize(:color => color, :background => bg_color)
@@ -36,9 +35,8 @@ class Display
         render
         input = @cursor.get_input
         unless input.nil?
-          @selected = !@selected
-          start_pos = input if @selected
-          unless @selected || start_pos.nil?
+          start_pos = input if @cursor.selected
+          unless @cursor.selected || start_pos.nil?
             board.move_piece(start_pos, input)
             start_pos = nil
           end

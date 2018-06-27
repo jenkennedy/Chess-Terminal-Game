@@ -9,7 +9,7 @@ class King < Piece
     @symbol = :"♚"
   end
 
-  def move_spots
+  def move_diffs
     [[0, 1], [0, -1],
     [1, 0], [-1, 0],
     [1, 1], [-1, -1],

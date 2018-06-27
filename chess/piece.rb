@@ -2,7 +2,7 @@ require 'byebug'
 
 class Piece
   attr_reader :symbol, :color, :pos
-  
+
   def initialize(pos, board)
     @pos = pos
     @board = board
@@ -49,7 +49,7 @@ module SteppingPiece
   def moves
     possible_moves = []
 
-    directions = move_spots
+    directions = move_diffs
 
     directions.each do |dir|
       row,col = @pos[0] + dir[0], @pos[1] + dir[1]

@@ -5,7 +5,7 @@ class Pawn < Piece
     super(pos, board)
     @color = color
     @symbol = :"♟"
-    @direction = pos[0] > 3 ? -1 : 1
+    @forward_dir = pos[0] > 3 ? -1 : 1
   end
 
   def move_piece(pos)
@@ -15,19 +15,19 @@ class Pawn < Piece
 
   def moves
     possible_moves = []
-    potential = [pos[0] + @direction * 2, pos[1]]
+    potential = [pos[0] + @forward_dir * 2, pos[1]]
     if @has_moved.nil? && valid_move?(potential)
       possible_moves << potential
     end
-    potential = [pos[0] + @direction, pos[1] + 1]
+    potential = [pos[0] + @forward_dir, pos[1] + 1]
     if board[potential].is_a?(Piece) && board[potential].color != color
       possible_moves << potential
     end
-    potential = [pos[0] + @direction, pos[1] - 1]
+    potential = [pos[0] + @forward_dir, pos[1] - 1]
     if board[potential].is_a?(Piece) && board[potential].color != color
       possible_moves << potential
     end
-    potential = [pos[0] + @direction, pos[1]]
+    potential = [pos[0] + @forward_dir, pos[1]]
     if valid_move?(potential)
       possible_moves << potential
     end
