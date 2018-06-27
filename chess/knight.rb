@@ -1,19 +1,19 @@
 require_relative 'piece.rb'
 
-class King < Piece
+class Knight < Piece
   include SteppingPiece
 
   def initialize(pos, board, color)
     super(pos, board)
     @color = color
-    @symbol = :"♚"
+    @symbol = :"♞"
   end
 
   def move_spots
-    [[0, 1], [0, -1],
-    [1, 0], [-1, 0],
-    [1, 1], [-1, -1],
-    [1, -1], [-1, 1]]
+    [[2, 1], [2, -1],
+    [-2, 1], [-2, -1],
+    [1, 2], [1, -2],
+    [-1, 2], [-1, -2]]
   end
 
 end
