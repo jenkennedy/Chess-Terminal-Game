@@ -1,7 +1,7 @@
 require 'colorize'
-require_relative 'board.rb'
-require_relative 'cursor.rb'
-require_relative 'piece.rb'
+require_relative 'board'
+require_relative 'cursor'
+require_relative 'piece'
 
 class Display
   def initialize(board)
