@@ -30,7 +30,7 @@ class Display
 
   def run
     start_pos = nil
-    while true
+    until @board.in_check?(:cyan)
       begin
         render
         input = @cursor.get_input

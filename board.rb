@@ -40,6 +40,7 @@ class Board
     self[[7,5]] = Bishop.new([7,5], self, :magenta)
 
     8.times do |i|
+      next if i == 4
       self[[1,i]] = Pawn.new([1,i], self, :cyan)
       self[[6,i]] = Pawn.new([6,i], self, :magenta)
     end
@@ -68,7 +69,10 @@ class Board
         end
       end
     end
-    check_kings(cyan_king, magenta_king)
+
+     checked = check_kings(cyan_king, magenta_king)
+     checked ? (puts "Checkmate!") : nil
+     checked
   end
 
   def check_kings(cyan_king, magenta_king)
@@ -76,9 +80,9 @@ class Board
       row.each do |piece|
         unless piece.is_a?(King)
           if piece.color == :cyan
-            return true if piece.moves.include?(cyan_king.pos)
-          else
             return true if piece.moves.include?(magenta_king.pos)
+          else
+            return true if piece.moves.include?(cyan_king.pos)
           end
         end
       end

@@ -9,4 +9,8 @@ class NullPiece
     @color = :white
     @symbol = :" "
   end
+
+  def moves
+    []
+  end
 end
